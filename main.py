@@ -47,7 +47,6 @@ if len(address) == 6:
 else:
     address = address[:4] + " " + address[-3:]
 
-
 # Print the response data
 print("Weather for Postcode:", address)
 print("Temperature:", temp, "C")
