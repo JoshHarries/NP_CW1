@@ -1,9 +1,11 @@
-#Import the relevant libraries
+# Import the relevant libraries
 import requests
 import json
 import urllib.parse
 
-address = input("Enter the postcode for the location: ")
+print("### Welcome to the Weather CLI! ###")
+
+address = input("Please enter the postcode: ")
 url = 'https://nominatim.openstreetmap.org/search/' + urllib.parse.quote(address) + '?format=json'
 
 response = requests.get(url).json()
@@ -27,7 +29,7 @@ data = json.loads(response.text)
 
 temp = json.dumps(data["current_weather"]["temperature"])
 rain_chance = json.dumps(data["daily"]["precipitation_probability_max"])
-wind_speed = data["current_weather"]["windspeed"]
+wind_speed = json.dumps(data["current_weather"]["windspeed"])
 sunrise = json.dumps(data["daily"]["sunrise"])
 sunset = json.dumps(data["daily"]["sunset"])
 timezone = json.dumps(data["timezone_abbreviation"])
@@ -49,10 +51,11 @@ else:
     address = address[:4] + " " + address[-3:]
 
 # Print the response data
-print("Weather for Postcode:", address)
-print("Temperature:", temp, "C")
-print("Chance of Rain:", rain_chance, "%")
-print("Wind speed:", wind_speed, "kmh")
-print("Next Sunrise:", sunrise[0], "@", sunrise[1] + timezone)
-print("Next Sunset:", sunset[0], "@", sunset[1] + timezone)
-print(response.text)
+print("-----------------------------")
+print("Current Weather for Postcode", address)
+print("Temperature:", temp + "°C")
+print("Chance of Rain:", rain_chance + "%")
+print("Wind speed:", wind_speed + "kmh")
+print("Next Sunrise:", sunrise[0], "@", sunrise[1], timezone)
+print("Next Sunset:", sunset[0], "@", sunset[1], timezone)
+#print(response.text)
