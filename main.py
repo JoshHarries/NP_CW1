@@ -14,7 +14,8 @@ lat = response[0]["lat"]
 lon = response[0]["lon"]
 
 # Set the OpenMeteo API endpoint and parameters from the above variables
-url = "https://api.open-meteo.com/v1/forecast?daily=sunrise,sunset,precipitation_probability_max&current_weather=true&forecast_days=1&timezone=auto"
+url = "https://api.open-meteo.com/v1/forecast?daily=sunrise,sunset," \
+      "precipitation_probability_max&current_weather=true&forecast_days=1&timezone=auto"
 params = {
     "latitude": lat,
     "longitude": lon
@@ -34,7 +35,7 @@ sunrise = json.dumps(data["daily"]["sunrise"])
 sunset = json.dumps(data["daily"]["sunset"])
 timezone = json.dumps(data["timezone_abbreviation"])
 
-# Strips certain variables of thier leading and trialing characters, e.g. [ + ]
+# Strips certain variables of their leading and trialing characters, e.g. [ + ]
 rain_chance = rain_chance.strip('[]')
 sunrise = sunrise.strip('["]')
 sunset = sunset.strip('["]')
